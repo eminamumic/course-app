@@ -1,3 +1,4 @@
+// src/pages/Administration.tsx
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -56,6 +57,11 @@ const Administration: React.FC = () => {
   }
 
   const handleSaveUser = () => {
+    if (!userName.trim() || !userLastName.trim()) {
+      alert('Please fill in both name and last name.')
+      return
+    }
+
     const newUserId = currentUser ? currentUser.id : `user_${users.length + 1}`
     const updatedUser = {
       id: newUserId,
@@ -160,7 +166,12 @@ const Administration: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>{t('cancel')}</Button>
-          <Button onClick={handleSaveUser}>{t('save')}</Button>
+          <Button
+            onClick={handleSaveUser}
+            disabled={!userName.trim() || !userLastName.trim()}
+          >
+            {t('save')}
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
