@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
   Drawer,
   List,
   ListItem,
@@ -12,20 +11,22 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const HamburgerMenu: React.FC = () => {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const { t } = useTranslation() // hook za prevod
 
   const toggleDrawer = (state: boolean) => () => {
     setOpen(state)
   }
 
   const menuItems = [
-    { text: 'Home', path: '/' },
-    { text: 'Course Management', path: '/course-management' },
-    { text: 'Course Overview', path: '/course-overview' },
-    { text: 'Administration', path: '/administration' },
+    { textKey: 'menu.home', path: '/' },
+    { textKey: 'menu.courseManagement', path: '/course-management' },
+    { textKey: 'menu.courseOverview', path: '/course-overview' },
+    { textKey: 'menu.administration', path: '/administration' },
   ]
 
   const handleNavigation = (path: string) => {
@@ -59,10 +60,10 @@ const HamburgerMenu: React.FC = () => {
             {menuItems.map((item) => (
               <ListItem
                 button
-                key={item.text}
+                key={item.textKey}
                 onClick={() => handleNavigation(item.path)}
               >
-                <ListItemText primary={item.text} />
+                <ListItemText primary={t(item.textKey)} />
               </ListItem>
             ))}
           </List>
