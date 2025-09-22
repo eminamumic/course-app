@@ -1,4 +1,3 @@
-// src/pages/Administration.tsx
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -42,10 +41,15 @@ const Administration: React.FC = () => {
   const [userName, setUserName] = useState('')
   const [userLastName, setUserLastName] = useState('')
 
+  const [nameError, setNameError] = useState('')
+  const [lastNameError, setLastNameError] = useState('')
+
   const handleCreateNewUser = () => {
     setCurrentUser(null)
     setUserName('')
     setUserLastName('')
+    setNameError('')
+    setLastNameError('')
     setOpenDialog(true)
   }
 
@@ -53,14 +57,29 @@ const Administration: React.FC = () => {
     setCurrentUser(user)
     setUserName(user.name)
     setUserLastName(user.lastName)
+    setNameError('')
+    setLastNameError('')
     setOpenDialog(true)
   }
 
   const handleSaveUser = () => {
-    if (!userName.trim() || !userLastName.trim()) {
-      alert('Please fill in both name and last name.')
-      return
+    let hasError = false
+
+    if (!userName.trim()) {
+      setNameError(t('please_fill_name'))
+      hasError = true
+    } else {
+      setNameError('')
     }
+
+    if (!userLastName.trim()) {
+      setLastNameError(t('please_fill_lastname'))
+      hasError = true
+    } else {
+      setLastNameError('')
+    }
+
+    if (hasError) return
 
     const newUserId = currentUser ? currentUser.id : `user_${users.length + 1}`
     const updatedUser = {
@@ -81,7 +100,7 @@ const Administration: React.FC = () => {
   }
 
   const handleDeleteUser = (userId: string) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
+    if (window.confirm(t('confirm_delete_user'))) {
       setUsers(users.filter((user) => user.id !== userId))
     }
   }
@@ -153,6 +172,8 @@ const Administration: React.FC = () => {
             variant="standard"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            error={!!nameError}
+            helperText={nameError}
           />
           <TextField
             margin="dense"
@@ -162,6 +183,8 @@ const Administration: React.FC = () => {
             variant="standard"
             value={userLastName}
             onChange={(e) => setUserLastName(e.target.value)}
+            error={!!lastNameError}
+            helperText={lastNameError}
           />
         </DialogContent>
         <DialogActions>
