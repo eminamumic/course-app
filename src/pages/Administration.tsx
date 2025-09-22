@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import {
   Box,
   Typography,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -10,13 +11,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
+  IconButton,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   TextField,
 } from '@mui/material'
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material'
 
 interface User {
   id: string
@@ -53,6 +55,31 @@ const Administration: React.FC = () => {
     setOpenDialog(true)
   }
 
+  const handleSaveUser = () => {
+    const newUserId = currentUser ? currentUser.id : `user_${users.length + 1}`
+    const updatedUser = {
+      id: newUserId,
+      name: userName,
+      lastName: userLastName,
+    }
+
+    if (currentUser) {
+      setUsers(
+        users.map((user) => (user.id === currentUser.id ? updatedUser : user))
+      )
+    } else {
+      setUsers([...users, updatedUser])
+    }
+
+    setOpenDialog(false)
+  }
+
+  const handleDeleteUser = (userId: string) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      setUsers(users.filter((user) => user.id !== userId))
+    }
+  }
+
   const handleCloseDialog = () => {
     setOpenDialog(false)
   }
@@ -80,6 +107,8 @@ const Administration: React.FC = () => {
               <TableCell>{t('user_id')}</TableCell>
               <TableCell>{t('name')}</TableCell>
               <TableCell>{t('last_name')}</TableCell>
+              <TableCell align="right">{t('edit')}</TableCell>
+              <TableCell align="right">{t('delete')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -88,6 +117,16 @@ const Administration: React.FC = () => {
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.lastName}</TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => handleEditUser(user)}>
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => handleDeleteUser(user.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -121,7 +160,7 @@ const Administration: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>{t('cancel')}</Button>
-          <Button onClick={handleCloseDialog}>{t('save')}</Button>
+          <Button onClick={handleSaveUser}>{t('save')}</Button>
         </DialogActions>
       </Dialog>
     </Box>
