@@ -29,6 +29,12 @@ const resources = {
       english: 'English',
       german: 'German',
       log_out: 'Log out',
+      menu: {
+        home: 'Home',
+        courseManagement: 'Course Management',
+        courseOverview: 'Course Overview',
+        administration: 'Administration',
+      },
     },
   },
   de: {
@@ -57,6 +63,12 @@ const resources = {
       english: 'Englisch',
       german: 'Deutsch',
       log_out: 'Abmelden',
+      menu: {
+        home: 'Startseite',
+        courseManagement: 'Kursverwaltung',
+        courseOverview: 'Kursübersicht',
+        administration: 'Verwaltung',
+      },
     },
   },
 }
