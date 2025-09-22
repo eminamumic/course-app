@@ -5,6 +5,7 @@ import Header from './components/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Administration from './pages/Administration'
+import CourseManagementView from './components/CourseMenagment/CourseMenagmentView'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,11 @@ const App: React.FC = () => {
         <Box>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="administration" element={<Administration />} />
+            <Route path="/administration" element={<Administration />} />
+            <Route
+              path="/course-management"
+              element={<CourseManagementView />}
+            />
           </Routes>
         </Box>
       </Container>
