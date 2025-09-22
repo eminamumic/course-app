@@ -1,3 +1,4 @@
+// src/pages/Administration.tsx
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -41,15 +42,13 @@ const Administration: React.FC = () => {
   const [userName, setUserName] = useState('')
   const [userLastName, setUserLastName] = useState('')
 
-  const [nameError, setNameError] = useState('')
-  const [lastNameError, setLastNameError] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleCreateNewUser = () => {
     setCurrentUser(null)
     setUserName('')
     setUserLastName('')
-    setNameError('')
-    setLastNameError('')
+    setIsSubmitted(false)
     setOpenDialog(true)
   }
 
@@ -57,29 +56,14 @@ const Administration: React.FC = () => {
     setCurrentUser(user)
     setUserName(user.name)
     setUserLastName(user.lastName)
-    setNameError('')
-    setLastNameError('')
+    setIsSubmitted(false)
     setOpenDialog(true)
   }
 
   const handleSaveUser = () => {
-    let hasError = false
+    setIsSubmitted(true)
 
-    if (!userName.trim()) {
-      setNameError(t('please_fill_name'))
-      hasError = true
-    } else {
-      setNameError('')
-    }
-
-    if (!userLastName.trim()) {
-      setLastNameError(t('please_fill_lastname'))
-      hasError = true
-    } else {
-      setLastNameError('')
-    }
-
-    if (hasError) return
+    if (!userName.trim() || !userLastName.trim()) return
 
     const newUserId = currentUser ? currentUser.id : `user_${users.length + 1}`
     const updatedUser = {
@@ -108,6 +92,10 @@ const Administration: React.FC = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false)
   }
+
+  const nameError = isSubmitted && !userName.trim() ? t('please_fill_name') : ''
+  const lastNameError =
+    isSubmitted && !userLastName.trim() ? t('please_fill_lastname') : ''
 
   return (
     <Box sx={{ p: 3 }}>
