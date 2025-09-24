@@ -55,6 +55,10 @@ const resources = {
       select_a_course: '-- Select a course --',
       select_department: '-- Select department --',
       select_classification: '-- Select classification --',
+      course_name_required: 'Course name is a mandatory field.',
+      course_created_successfully: 'Course created successfully!',
+      course_saved_successfully: 'Course saved successfully!',
+      create_new_course: 'Create new course',
     },
   },
   de: {
@@ -110,6 +114,10 @@ const resources = {
       select_a_course: '-- Kurs auswählen --',
       select_department: '-- Abteilung auswählen --',
       select_classification: '-- Klassifizierung auswählen --',
+      course_name_required: 'Der Kursname ist ein Pflichtfeld.',
+      course_created_successfully: 'Kurs erfolgreich erstellt!',
+      course_saved_successfully: 'Kurs erfolgreich gespeichert!',
+      create_new_course: 'Neuen Kurs erstellen',
     },
   },
 }
