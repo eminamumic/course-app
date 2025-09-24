@@ -97,8 +97,13 @@ const Administration: React.FC = () => {
     isSubmitted && !userLastName.trim() ? t('please_fill_lastname') : ''
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Box sx={{ p: 3, fontFamily: 'serif' }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ fontFamily: 'serif' }}
+      >
         {t('administration_view')}
       </Typography>
 
@@ -112,7 +117,7 @@ const Administration: React.FC = () => {
         </Button>
       </Box>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ fontFamily: 'serif' }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -146,7 +151,7 @@ const Administration: React.FC = () => {
       </TableContainer>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>
+        <DialogTitle sx={{ fontFamily: 'serif' }}>
           {currentUser ? t('edit_user') : t('create_user_title')}
         </DialogTitle>
         <DialogContent>
@@ -161,6 +166,7 @@ const Administration: React.FC = () => {
             onChange={(e) => setUserName(e.target.value)}
             error={!!nameError}
             helperText={nameError}
+            sx={{ fontFamily: 'serif' }}
           />
           <TextField
             margin="dense"
@@ -172,9 +178,10 @@ const Administration: React.FC = () => {
             onChange={(e) => setUserLastName(e.target.value)}
             error={!!lastNameError}
             helperText={lastNameError}
+            sx={{ fontFamily: 'serif' }}
           />
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ fontFamily: 'serif' }}>
           <Button onClick={handleCloseDialog}>{t('cancel')}</Button>
           <Button
             onClick={handleSaveUser}
