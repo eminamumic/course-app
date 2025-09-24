@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Box, Typography, Button } from '@mui/material'
-import { FilterSection } from './components/FilterSection'
 import { CourseFormFields } from './components/CourseFormFields'
+import { FilterSection } from './components/FilterSection'
 import type {
   CourseFormValues,
   CourseFilterValues,
