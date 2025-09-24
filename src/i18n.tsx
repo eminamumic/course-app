@@ -51,6 +51,10 @@ const resources = {
       developers: 'Developers',
       managers: 'Managers',
       hr: 'HR',
+      filter: 'Filter',
+      select_a_course: '-- Select a course --',
+      select_department: '-- Select department --',
+      select_classification: '-- Select classification --',
     },
   },
   de: {
@@ -102,6 +106,10 @@ const resources = {
       developers: 'Entwickler',
       managers: 'Manager',
       hr: 'HR',
+      filter: 'Filter',
+      select_a_course: '-- Kurs auswählen --',
+      select_department: '-- Abteilung auswählen --',
+      select_classification: '-- Klassifizierung auswählen --',
     },
   },
 }
